@@ -21,5 +21,5 @@ jobs:
       run: pip install databricks-cli
     - name: Deploy to Databricks
       run: |
-        databricks configure --token "dapi39f4dcb5463a8c599a6f374080d6fb53-3"
+        databricks configure --token "dapi61f701468bffc505edc50e9af2ace6a9-3"
         databricks workspace import --language PYTHON --overwrite "/path/to/your/module.py" "dist/module-0.0.1-py3-none-any.whl"
