@@ -1,0 +1,25 @@
+name: Build and Deploy
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+    - name: Build package
+      run: python setup.py bdist_wheel
+    - name: Install databricks-cli
+      run: pip install databricks-cli
+    - name: Deploy to Databricks
+      run: |
+        databricks configure --token "dapi39f4dcb5463a8c599a6f374080d6fb53-3"
+        databricks workspace import --language PYTHON --overwrite "/path/to/your/module.py" "dist/module-0.0.1-py3-none-any.whl"
