@@ -26,4 +26,4 @@ jobs:
         echo "[DEFAULT]" > ~/.databrickscfg
         echo "host = https://adb-1128000650204589.9.azuredatabricks.net" >> ~/.databrickscfg
         echo "token = dapi61f701468bffc505edc50e9af2ace6a9-3" >> ~/.databrickscfg
-        databricks workspace import --language PYTHON --overwrite "/path/to/your/module.py" "dist/module-0.0.1-py3-none-any.whl"
+        databricks workspace import --language PYTHON --overwrite "https://github.com/SoumyaAkunoori/GitActionsDemo/blob/main/main.py" "dist/myproject-0.1-py3-none-any.whl"
