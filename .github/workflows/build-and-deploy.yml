@@ -12,7 +12,8 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
       with:
-        repository: 'https://marsoddaorg-dev@dev.azure.com/marsoddaorg-dev/marsoddaproject-dev/_git/ADB.GIT.DEMO'
+        repository: 'https://dev.azure.com/marsoddaorg-dev/marsoddaproject-dev/_git/ADB.GIT.DEMO
+'
         ref: 'main'
         token: mj66vqnfkahojxckoa6y4rcnso4si4ml3yvmpbh4rq5d56zxjfhq
         
