@@ -1,0 +1,35 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      with:
+        repository: 'https://marsoddaorg-dev@dev.azure.com/marsoddaorg-dev/marsoddaproject-dev/_git/ADB.GIT.DEMO'
+        ref: 'main'
+        token: mj66vqnfkahojxckoa6y4rcnso4si4ml3yvmpbh4rq5d56zxjfhq
+        
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Build package
+      run: python setup.py bdist_wheel
+    
+    - name: Deploy to Databricks
+      run: |
+        databricks configure --token "dapi61f701468bffc505edc50e9af2ace6a9-3"
+        databricks workspace import --language PYTHON --overwrite "/path/to/your/main.py" "dist/main-0.0.1-py3-none-any.whl"
