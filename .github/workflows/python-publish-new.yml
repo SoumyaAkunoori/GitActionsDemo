@@ -60,11 +60,11 @@ jobs:
 #             sonar.projectKey=odd-Sonarqube
 #             sonar.projectName=odd-Sonarqube
 
-      - name: Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v2.4.1
-        if: always()
-        with:
-          files: '**/junit/*.xml'
+#      - name: Test Results
+#        uses: EnricoMi/publish-unit-test-result-action@v2.4.1
+#        if: always()
+#        with:
+#          files: '**/junit/*.xml'
 
       - name: Copy Notebooks
         run: |
