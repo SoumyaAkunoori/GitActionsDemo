@@ -66,9 +66,16 @@ jobs:
 #        if: always()
 #        with:
 #          files: '**/junit/*.xml'
-   
-      - name: Build package
+    
+      - name: Build wheel package
         run: python setup.py bdist_wheel
+        
+      - name: Publish Wheel artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: wheel
+          path: ./dist
+      
       - name: Copy Notebooks
         run: |
           mkdir -p notebooks
