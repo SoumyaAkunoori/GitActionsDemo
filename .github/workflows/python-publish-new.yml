@@ -13,8 +13,8 @@ on:
     branches:
       - main
     
-    paths:
-      - 'databricks/*'
+#     paths:
+#       - 'databricks/*'
 
 # env:
 #   ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
