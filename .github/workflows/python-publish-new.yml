@@ -20,13 +20,15 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-    - name: Install Azure CLI
-      uses: azure/setup-azure-cli@v1
+    - name: Install Python and Azure CLI
+      uses: actions/setup-python@v2
       with:
-        version: latest
-    - name: Install Databricks CLI
+        python-version: 3.8
+    - name: Install Azure CLI and Databricks CLI
       run: |
-        pip install databricks-cli
+        pip install --upgrade pip
+        pip install azure-cli databricks-cli
+    
     - name: Authenticate to Azure
       run: |
         az login --service-principal -u d9c574aa-7a85-4704-972e-5183cb3c5a6c -p oBy8Q~rebTUZPsb8EVia5ahCri0hgF3LHg9Tvaya --tenant e714ef31-faab-41d2-9f1e-e6df4af16ab8
