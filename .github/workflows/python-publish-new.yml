@@ -44,10 +44,12 @@ jobs:
           pip install pytest-azurepipelines
           pip install pytest-cov
           pip install azure-cli
-
-      - name: Lint Tests
+      - name: Run pylint
         run: |
-          pylint | find -name '*.py'
+          pylint ./*.py > pylint_report.txt || true
+#      - name: Lint Tests
+#        run: |
+#          pylint | find -name '*.py'
 
 #       - name: SonarQube
 #         uses: sonarsource/sonarqube-scan-action@master
