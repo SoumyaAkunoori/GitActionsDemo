@@ -12,5 +12,7 @@ setup(
         "console_scripts": [
             "myproject=myproject.main:main"
         ]
-    }
+    },
+     # include the following line to generate a wheel distribution
+    setup_requires=['wheel'],
 )
