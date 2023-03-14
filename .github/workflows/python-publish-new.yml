@@ -31,7 +31,7 @@ jobs:
     
     - name: Authenticate to Azure
       run: |
-       az login --service-principal -u d9c574aa-7a85-4704-972e-5183cb3c5a6c -p oBy8Q~rebTUZPsb8EVia5ahCri0hgF3LHg9Tvaya --tenant e714ef31-faab-41d2-9f1e-e6df4af16ab8
+       az login --service-principal -u 129467ad-cf98-451f-a51d-0575c6ea4bb7 -p UF78Q~K6KuapkVxPxVwjkrUTkTPqDMrdy4lThaHK --tenant e714ef31-faab-41d2-9f1e-e6df4af16ab8
     - name: Deploy notebooks
       run: |
         databricks workspace import_dir ./notebooks /Users/soumya.akunoori@tigeranalytics.com/notebooks
