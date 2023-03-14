@@ -21,7 +21,7 @@ jobs:
         pip install databricks-cli
     - name: Authenticate to Azure
       run: |
-        az login --service-principal -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
+        az login --service-principal -u d9c574aa-7a85-4704-972e-5183cb3c5a6c -p oBy8Q~rebTUZPsb8EVia5ahCri0hgF3LHg9Tvaya --tenant e714ef31-faab-41d2-9f1e-e6df4af16ab8
     - name: Deploy notebooks
       run: |
         databricks workspace import_dir ./notebooks /Users/john.doe/notebooks
