@@ -2,16 +2,11 @@ trigger:
   branches:
     include:
     - main
-    - azure-pipelines
-  paths:
-    include:
-    - databricks/*
 
 variables:
   subscription: '7b206cd2-248a-49a7-b5e0-6adf9df31cb2'
   resourceGroupName: 'Test-rg'
   databricksName: 'ADB-GIT-Demo'
-#  PipelineName: '01_create_training_data'
 
 pool:
   vmImage: ubuntu-latest
