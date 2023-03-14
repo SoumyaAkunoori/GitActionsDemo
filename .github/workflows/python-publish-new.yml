@@ -6,32 +6,72 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Azure Databricks CI Pipeline
+name: Azure Pipeline
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches:
+      - dev
+      - azure-pipelines
+    paths:
+      - 'databricks/*'
+
+# env:
+#   ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+#   ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#   ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+#   ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
 
 jobs:
-  build:
+  sonarqube:
     runs-on: ubuntu-latest
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-    - name: Install Python and Azure CLI
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.8
-    - name: Install Azure CLI and Databricks CLI
-      run: |
-        pip install --upgrade pip
-        pip install azure-cli databricks-cli
-    
-    - name: Authenticate to Azure
-      run: |
-       az login --service-principal -u 129467ad-cf98-451f-a51d-0575c6ea4bb7 -p UF78Q~K6KuapkVxPxVwjkrUTkTPqDMrdy4lThaHK --tenant e714ef31-faab-41d2-9f1e-e6df4af16ab8
-    - name: Deploy notebooks
-      run: |
-        databricks workspace import_dir ./notebooks /Users/soumya.akunoori@tigeranalytics.com/notebooks
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pylint
+          pip install pytest
+          pip install pytest-azurepipelines
+          pip install pytest-cov
+          pip install azure-cli
+
+      - name: Lint Tests
+        run: |
+          pylint | find -name '*.py'
+
+#       - name: SonarQube
+#         uses: sonarsource/sonarqube-scan-action@master
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+#         with:
+#           projectBaseDir: .
+#           extraProperties: |
+#             sonar.projectKey=odd-Sonarqube
+#             sonar.projectName=odd-Sonarqube
+
+      - name: Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v1.10.0
+        if: always()
+        with:
+          files: '**/junit/*.xml'
+
+      - name: Copy Notebooks
+        run: |
+          mkdir -p $(Build.ArtifactStagingDirectory)
+          cp -r databricks $(Build.ArtifactStagingDirectory)
+
+      - name: Publish Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: drop-notebooks
+          path: $(Build.ArtifactStagingDirectory)
