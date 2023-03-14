@@ -11,8 +11,8 @@ name: Azure Pipeline
 on:
   push:
     branches:
-      - dev
-      - azure-pipelines
+      - main
+    
     paths:
       - 'databricks/*'
 
