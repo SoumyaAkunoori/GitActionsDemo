@@ -1,8 +1,7 @@
 trigger:
   branches:
     include:
-    - dev
-    #- main
+    - main
     - azure-pipelines
   paths:
     include:
