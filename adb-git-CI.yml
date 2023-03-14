@@ -1,0 +1,27 @@
+name: Azure Databricks CI Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Install Azure CLI
+      uses: azure/setup-azure-cli@v1
+      with:
+        version: latest
+    - name: Install Databricks CLI
+      run: |
+        pip install databricks-cli
+    - name: Authenticate to Azure
+      run: |
+        az login --service-principal -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
+    - name: Deploy notebooks
+      run: |
+        databricks workspace import_dir ./notebooks /Users/john.doe/notebooks
