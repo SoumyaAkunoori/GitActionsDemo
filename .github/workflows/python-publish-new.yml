@@ -68,11 +68,12 @@ jobs:
 
       - name: Copy Notebooks
         run: |
-          mkdir -p $(Build.ArtifactStagingDirectory)
-          cp -r databricks $(Build.ArtifactStagingDirectory)
+          mkdir -p ${{github.workspace}}/notebooks
+          cp -r databricks/* ${{github.workspace}}/notebooks
 
       - name: Publish Artifacts
         uses: actions/upload-artifact@v2
         with:
           name: drop-notebooks
-          path: $(Build.ArtifactStagingDirectory)
+          path: ${{github.workspace}}/notebooks
+
