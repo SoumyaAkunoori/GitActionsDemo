@@ -44,9 +44,9 @@ jobs:
           pip install pytest-azurepipelines
           pip install pytest-cov
           pip install azure-cli
-      - name: Run pylint
-        run: |
-          pylint ./*.py > pylint_report.txt || true
+      - name: Lint Tests
+        run: pylint **/*.py
+
 #      - name: Lint Tests
 #        run: |
 #          pylint | find -name '*.py'
