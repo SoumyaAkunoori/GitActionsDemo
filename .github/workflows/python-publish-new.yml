@@ -44,6 +44,7 @@ jobs:
           pip install pytest-azurepipelines
           pip install pytest-cov
           pip install azure-cli
+          pip install wheel
 
       - name: Lint Tests
         run: |
