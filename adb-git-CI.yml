@@ -12,6 +12,9 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
+    - name: Set Git terminal prompt
+      run: |
+        export GIT_TERMINAL_PROMPT=1
     - name: Install Azure CLI
       uses: azure/setup-azure-cli@v1
       with:
