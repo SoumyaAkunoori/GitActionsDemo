@@ -6,7 +6,8 @@ setup(
     packages=find_packages(),
     install_requires=[
         "numpy",
-        "pandas"
+        "pandas",
+        "pyspark==3.2.0"
     ],
     entry_points={
         "console_scripts": [
