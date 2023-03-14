@@ -65,7 +65,9 @@ jobs:
 #        if: always()
 #        with:
 #          files: '**/junit/*.xml'
-
+   
+      - name: Build package
+        run: python setup.py bdist_wheel
       - name: Copy Notebooks
         run: |
           mkdir -p notebooks
