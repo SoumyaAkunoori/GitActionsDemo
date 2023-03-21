@@ -90,12 +90,11 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v3.4.0
 
-    - name: Install the Databricks CLI
-      run: pip install databricks-cli
-        echo "[DEFAULT]" > ~/.databrickscfg
-        echo "host = https://adb-1128000650204589.9.azuredatabricks.net" >> ~/.databrickscfg
-        echo "token = dapi39f4dcb5463a8c599a6f374080d6fb53-3" >> ~/.databrickscfg
-		
+    - name: Install Databricks CLI
+      run:
+        pip install databricks-cli
+      
+        echo -e "[DEFAULT]\nhost = https://adb-1128000650204589.9.azuredatabricks.net\ntoken = dapi61f701468bffc505edc50e9af2ace6a9-3" > ~/.databrickscfg
 
     - name: Deploy Notebooks to Databricks
       run: |
