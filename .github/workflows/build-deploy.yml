@@ -99,22 +99,28 @@ jobs:
     - name: Deploy Notebooks to Databricks
       run: |
         
-        $dirsep = if ($IsWindows) { "\\" } else { "/" }
+        if [[ "$OSTYPE" == "win32" || "$OSTYPE" == "cygwin" || "$OSTYPE" == "msys" ]]; then
+          IsWindows=true
+        else
+          IsWindows=false
+        fi
+
+        if [ $IsWindows = true ]; then
+          dirsep="\\"
+        else
+          dirsep="/"
+        fi
+
         for path in databricks/databricks**/*.py
         do
-          
           dir=$(dirname $path)
-          
           dir=${dir#"databricks/databricks"}
-          
-          dir=${dir//\//$dirsep}
-
+          dir=${dir//$dirsep}
           databricks workspace mkdirs /$dir
-          
           contents=$(cat $path)
-
           databricks workspace import -f SOURCE_PATH=$path -o /$dir/$(basename $path) -l PYTHON --overwrite
         done
+
       env:
         DATABRICKS_HOST: "https://adb-1128000650204589.9.azuredatabricks.net" 
         DATABRICKS_TOKEN: "dapi61f701468bffc505edc50e9af2ace6a9-3"
