@@ -98,7 +98,7 @@ jobs:
 
     - name: Deploy Notebooks to Databricks
       run: 
-        
+        set -x
         if [[ "$OSTYPE" == "win32" || "$OSTYPE" == "cygwin" || "$OSTYPE" == "msys" ]]; then
           IsWindows=true
         else
