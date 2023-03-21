@@ -83,38 +83,57 @@ jobs:
       #   env:
       #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
+ name: Deploy Notebooks to Azure Databricks
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  AZURE_SUBSCRIPTION_ID: 7b206cd2-248a-49a7-b5e0-6adf9df31cb2
+  AZURE_RESOURCE_GROUP: Test-rg
+  AZURE_DATABRICKS_WORKSPACE: ADB-GIT-Demo
+  AZURE_DATABRICKS_TOKEN: dapi61f701468bffc505edc50e9af2ace6a9-3
+  AZURE_DATABRICKS_CLUSTER_ID: 0320-073504-caw7ti2 
+  NOTEBOOKS_FOLDER: databricks/databricks
+
+jobs:
   deploy:
-    name: Deploy to Databricks
     runs-on: ubuntu-latest
+
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v3.4.0
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Configure Databricks CLI
-      uses: actions/Mars-ODDA-Devops/Reference-implementation-databricks@v2
+      - name: Install Databricks CLI
+        run: |
+          python3 -m pip install databricks-cli
 
-    - name: Deploy Notebooks to Databricks
-      run: |
-        
-        $dirsep = if ($IsWindows) { "\\" } else { "/" }
-        for path in databricks/databricks**/*.py
-        do
-          
-          dir=$(dirname $path)
-          
-          dir=${dir#"databricks/databricks"}
-          
-          dir=${dir//\//$dirsep}
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-          databricks workspace Mkdirs /$dir
-          
-          contents=$(cat $path)
+      - name: Deploy Notebooks
+        run: |
+          # Authenticate to the Databricks workspace
+          databricks configure --token dapi61f701468bffc505edc50e9af2ace6a9-3 --url https://adb-1128000650204589.9.azuredatabricks.net
 
-          databricks workspace import -f SOURCE_PATH=$path -o /$dir/$(basename $path) -l PYTHON --overwrite
-        done
-      env:
-        DATABRICKS_HOST: "https://adb-1128000650204589.9.azuredatabricks.net" 
-        DATABRICKS_TOKEN: "dapi61f701468bffc505edc50e9af2ace6a9-3"
+          # Get the ID of the Databricks workspace
+          workspace_id=$(databricks workspace list --output JSON | jq --raw-output '.[] | select(.path == "/") | .id')
+
+          # Get the ID of the Databricks cluster
+          cluster_id=$(databricks clusters get --cluster-id "0320-073504-caw7ti2" --output JSON | jq --raw-output '.cluster_id')
+
+          # Get the ID of the destination folder
+          destination_folder_id=$(databricks workspace mkdirs --path "/databricks/databricks" --output JSON | jq --raw-output '.path')
+
+          # Deploy notebooks to the destination folder
+          for notebook in $(find . -name '*.py'); do
+            notebook_name=$(basename "$databricks")
+            databricks workspace import -l PYTHON -f OVERWRITE --cluster-id "0320-073504-caw7ti2" --path "/databricks/databricks/${databricks}" "${io_utils.py}"
+          done
 
     
   
