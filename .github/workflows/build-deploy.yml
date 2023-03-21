@@ -118,7 +118,7 @@ jobs:
           dir=${dir//$dirsep}
           databricks workspace mkdirs /$dir
           contents=$(cat $path)
-          databricks workspace import --format SOURCE_PATH=$path -o /$dir/$(basename $path) -l PYTHON --overwrite
+          databricks workspace import --format SOURCE --path $path --overwrite /$dir/$(basename $path)
         done
 
       env:
