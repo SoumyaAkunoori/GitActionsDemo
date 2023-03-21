@@ -109,7 +109,7 @@ jobs:
       - name: Deploy code to databricks workspace
         run: |
             ##databricks workspace import ${{ inputs.service_code_file }} ${{ inputs.databricks_code_path }} --language python --overwrite
-            databricks workspace import databricks/databricks/house_price/ml_workload/house_price_prediction/data_drift_monitoring/data_drift_func.py ** --language python --overwrite
+            databricks workspace import databricks/house_price/ml_workload/house_price_prediction/data_drift_monitoring/data_drift_func.py ** --language python --overwrite
 
     
   
