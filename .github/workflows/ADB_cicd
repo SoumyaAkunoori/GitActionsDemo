@@ -5,7 +5,7 @@ on:
     branches:
       - main
     #paths:
-    #  - databricks/**/*.py
+    #  - databricks/databricks/**/*.py
 jobs:
 
   pylint:
@@ -97,12 +97,12 @@ jobs:
       run: |
         
         $dirsep = if ($IsWindows) { "\\" } else { "/" }
-        for path in databricks/**/*.py
+        for path in databricks/databricks**/*.py
         do
           
           dir=$(dirname $path)
           
-          dir=${dir#"databricks/"}
+          dir=${dir#"databricks/databricks"}
           
           dir=${dir//\//$dirsep}
 
