@@ -1,0 +1,17 @@
+raw_csv_path : "abfss://data@mlopscompletepocsa.dfs.core.windows.net/house_price/enriched/historical/housing.csv"
+raw_data_path: "abfss://data@mlopscompletepocsa.dfs.core.windows.net/house_price/raw/daily_raw"
+enriched_data_path: "abfss://data@mlopscompletepocsa.dfs.core.windows.net/house_price/enriched/daily_enriched"
+database: "house_price"
+raw_table: "daily_raw"
+enriched_table: "daily_enriched"
+
+# categorical_variable: 'ocean_proximity'
+# feature_store_db_name: 'house_price_features'
+
+# target_col: 'median_house_value'
+primary_key: ['house_id','Date']
+
+# results_path: "house_price/curated/"
+
+# feature_path: "house_price/enriched/features/"
+

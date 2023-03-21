@@ -1,0 +1,36 @@
+adls:
+    input_container_path: "abfss://data@mlopscompletepocsa.dfs.core.windows.net/curated/rdbms/sales/historical"
+
+numerical_cols:
+    -   "total_sold_quantity"
+    -   "total_ext_wholesale_cost"
+    -   "total_ext_list_price"
+    -   "total_ext_ship_cost"
+    -   "total_ext_tax"
+    -   "total_coupon_amt"
+    -   "total_net_paid"
+    -   "total_net_paid_inc_tax"
+
+mandatory_cols:
+    -   "date"
+    -   "year"
+    -   "quarter_name"
+    -   "brand"
+    -   "manufact"
+    -   "product_name"
+    -   "source"
+    -   "store_name"
+    -   "total_sold_quantity"
+    -   "total_ext_wholesale_cost"
+    -   "total_ext_ship_cost"
+    -   "total_ext_tax"
+    -   "total_coupon_amt"
+    -   "total_net_paid"
+    -   "total_net_paid_inc_tax"
+
+date_cols:
+    -   "date"
+    -   "partition_date"
+
+table: "final_df"
+

@@ -1,0 +1,60 @@
+- primary_key:
+    web_returns:
+        -   "wr_item_sk"
+        -   "wr_order_number"
+
+    catalog_returns:
+        -   "cr_item_sk"
+        -   "cr_order_number"
+
+    store_returns:
+        -   "sr_item_sk"
+        -   "sr_ticket_number"
+
+    web_sales:
+        -   "ws_item_sk"
+        -   "ws_order_number"
+
+    inventory:
+        -   "inv_date_sk"
+        -   "inv_item_sk"
+        -   "inv_warehouse_sk"
+
+    catalog_sales:
+        -   "cs_item_sk"
+        -   "cs_order_number"
+
+    store_sales:
+        -   "ss_item_sk"
+        -   "ss_ticket_number"
+
+- adls:
+    storage_name: "mlopscompletepocsa"
+    data_container_name: "data"
+    input_container_path: "abfss://data@mlopscompletepocsa.dfs.core.windows.net/raw/rdbms/sales/historical"
+
+- tables:
+    -   "income_band"
+    -   "warehouse"
+    -   "ship_mode"
+    -   "reason"
+    -   "call_center"
+    -   "store"
+    -   "web_page"
+    -   "web_site"
+    -   "promotion"
+    -   "household_demographics"
+    -   "catalog_page"
+    -   "item"
+    -   "time_dim"
+    -   "customer_address"
+    -   "web_returns"
+    -   "date_dim"
+    -   "customer"
+    -   "catalog_returns"
+    -   "store_returns"
+    -   "customer_demographics"
+    -   "web_sales"
+    -   "inventory"
+    -   "catalog_sales"
+    -   "store_sales"

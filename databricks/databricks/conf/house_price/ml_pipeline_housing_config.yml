@@ -1,0 +1,24 @@
+
+data_path : "abfss://data@mlopscompletepocsa.dfs.core.windows.net/house_price/enriched/historical/housing.csv"
+
+categorical_variable: 'ocean_proximity'
+feature_store_db_name: 'house_price_features'
+
+target_col: 'median_house_value'
+primary_key: ['house_id','Date']
+
+results_path: "abfss://data@mlopscompletepocsa.dfs.core.windows.net/house_price/curated/scoring"
+out_path: "abfss://data@mlopscompletepocsa.dfs.core.windows.net/house_price/enriched/daily/"
+feature_path: "abfss://data@mlopscompletepocsa.dfs.core.windows.net/house_price/enriched/features/"
+training_path: "abfss://data@mlopscompletepocsa.dfs.core.windows.net/house_price/enriched/training/"
+daily_enriched_path: "abfss://data@mlopscompletepocsa.dfs.core.windows.net/house_price/enriched/daily_enriched/"
+scoring_data_path: "abfss://data@mlopscompletepocsa.dfs.core.windows.net/house_price/curated/scoring"
+enriched_category: "house_price_enriched"
+curated_category: "house_prie_curated"
+training_table: "training"
+scoring_table: "scoring"
+featurestore_table: "features"
+feature_table : "gen_features"
+daily_table: "house_price_enriched"
+model_name: "house_price_prediction"
+house_price_category: "house_price"

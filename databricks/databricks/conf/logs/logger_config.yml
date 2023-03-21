@@ -1,0 +1,15 @@
+app:
+    appId: "9fe72a33-7ce9-45de-9cde-7949466840da"
+
+dcr:
+    dcrImmutableId: "dcr-d70121d555e544f6b818749a7f01bf28"
+
+dce:
+    dceEndpoint: "https://mlops-poc-databricks-logger-dce-iehc.eastus-1.ingest.monitor.azure.com"
+
+authentication:
+    url: "https://login.microsoftonline.com/e714ef31-faab-41d2-9f1e-e6df4af16ab8/oauth2/v2.0/token"
+    scope: "https%3a%2f%2fmonitor.azure.com%2f%2f.default"
+
+logingestionurl:
+    url: "https://mlops-poc-databricks-logger-dce-iehc.eastus-1.ingest.monitor.azure.com/dataCollectionRules/dcr-d70121d555e544f6b818749a7f01bf28/streams/Custom-MyTableRawData?api-version=2021-11-01-preview"

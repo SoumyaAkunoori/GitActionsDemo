@@ -1,0 +1,7 @@
+jdbc:
+    jdbcHostname: "mlops-complete-poc-sql-db-derver.database.windows.net"
+    jdbcPort: 1433
+    jdbcDatabase: "mlops-complete-poc-sql-db1"
+    jdbcUsername: "CloudSA89caae03"
+    jdbcPassword: "Tiger123"
+    jdbcDriver: "com.microsoft.sqlserver.jdbc.SQLServerDriver"

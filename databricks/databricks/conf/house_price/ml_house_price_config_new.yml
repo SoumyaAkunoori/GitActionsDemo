@@ -1,0 +1,55 @@
+# raw_csv_path : "abfss://data@mlopscompletepocsa.dfs.core.windows.net/house_price/enriched/historical/housing.csv"
+
+data_paths: 
+    raw_data_path: "abfss://data@mlopscompletepocsa.dfs.core.windows.net/house_price/raw/daily_raw"
+    daily_enriched_path: "abfss://data@mlopscompletepocsa.dfs.core.windows.net/house_price/enriched/daily_enriched/"
+    historical_data_path: "abfss://data@mlopscompletepocsa.dfs.core.windows.net/house_price/enriched/historical/housing.csv" #previously data_path
+    feature_path: "abfss://data@mlopscompletepocsa.dfs.core.windows.net/house_price/enriched/features/"
+    training_path: "abfss://data@mlopscompletepocsa.dfs.core.windows.net/house_price/enriched/training/"
+    scoring_data_path: "abfss://data@mlopscompletepocsa.dfs.core.windows.net/house_price/curated/scoring"
+
+tables:
+    raw_table: "daily_raw"
+    enriched_table: "daily_enriched"
+    training_table: "training"
+    scoring_table: "scoring"
+    featurestore_table: "features"
+    feature_table : "gen_features"
+    daily_table: "house_price_enriched"
+
+databases:
+    # - database: "house_price" #this can be removed
+    feature_store_db: 'house_price_features'  #previously feature_store_db_name
+    enriched_db: "house_price_enriched"  #previously enriched_category
+    curated_db: "house_price_curated"  #previously curated_category
+    house_price_db: "house_price" #previously house_price_category and database
+
+
+historical_data_format: 'csv'
+
+categorical_variable: 'ocean_proximity'
+
+target_col: 'median_house_value'
+primary_key: ['house_id','Date']
+
+# out_path: "abfss://data@mlopscompletepocsa.dfs.core.windows.net/house_price/enriched/daily/"
+
+
+model_name: "house_price_prediction"
+
+log_catalog:
+    app:
+        appId: "9fe72a33-7ce9-45de-9cde-7949466840da"
+
+    dcr:
+        dcrImmutableId: "dcr-d70121d555e544f6b818749a7f01bf28"
+
+    dce:
+        dceEndpoint: "https://mlops-poc-databricks-logger-dce-iehc.eastus-1.ingest.monitor.azure.com"
+
+    authentication:
+        url: "https://login.microsoftonline.com/e714ef31-faab-41d2-9f1e-e6df4af16ab8/oauth2/v2.0/token"
+        scope: "https%3a%2f%2fmonitor.azure.com%2f%2f.default"
+
+    logingestionurl:
+        url: "https://mlops-poc-databricks-logger-dce-iehc.eastus-1.ingest.monitor.azure.com/dataCollectionRules/dcr-d70121d555e544f6b818749a7f01bf28/streams/Custom-MyTableRawData?api-version=2021-11-01-preview"
