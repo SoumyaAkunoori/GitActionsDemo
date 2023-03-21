@@ -97,7 +97,7 @@ jobs:
         echo -e "[DEFAULT]\nhost = https://adb-1128000650204589.9.azuredatabricks.net\ntoken = dapi61f701468bffc505edc50e9af2ace6a9-3" > ~/.databrickscfg
 
     - name: Deploy Notebooks to Databricks
-      run: |
+      run: 
         
         if [[ "$OSTYPE" == "win32" || "$OSTYPE" == "cygwin" || "$OSTYPE" == "msys" ]]; then
           IsWindows=true
