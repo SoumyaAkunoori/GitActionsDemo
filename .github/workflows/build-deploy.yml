@@ -120,6 +120,8 @@ jobs:
           contents=$(cat $path)
           databricks workspace import -f SOURCE -l PYTHON /$dir/$(basename $path) $path --overwrite
         done
+        # import io_utils.py
+        databricks workspace import -f SOURCE -l PYTHON /databricks/databricks/io_utils.py databricks/databricks/io_utils.py --overwrite
 
       env:
         DATABRICKS_HOST: "https://adb-1128000650204589.9.azuredatabricks.net" 
