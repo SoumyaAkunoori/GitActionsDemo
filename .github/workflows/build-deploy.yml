@@ -86,45 +86,30 @@ jobs:
   deploy:
     name: Deploy to Databricks
     runs-on: ubuntu-latest
+    
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v3.4.0
-
-    - name: Install Databricks CLI
-      run:
-        pip install databricks-cli
+      - name: Checkout current repository
+        uses: actions/checkout@v3.4.0
       
-        echo -e "[DEFAULT]\nhost = https://adb-1128000650204589.9.azuredatabricks.net\ntoken = dapi61f701468bffc505edc50e9af2ace6a9-3" > ~/.databrickscfg
+      - name: Set up python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
 
-    - name: Deploy Notebooks to Databricks
-      run: | 
-      
-        if [[ "$OSTYPE" == "win32" || "$OSTYPE" == "cygwin" || "$OSTYPE" == "msys" ]]; then
-          IsWindows=true
-        else
-          IsWindows=false
-        fi
-
-        if [ $IsWindows = true ]; then
-          dirsep="\\"
-        else
-          dirsep="/"
-        fi
-
-        for path in databricks/databricks**/*.py
-        do
-          dir=$(dirname $path)
-          dir=${dir#"databricks/databricks"}
-          dir=${dir//$dirsep}
-          databricks workspace mkdirs /$dir
-          contents=$(cat $path)
-          databricks workspace import -f SOURCE -l PYTHON /$dir/$(basename $path) $path --overwrite
-        done
-        
-
-      env:
-        DATABRICKS_HOST: "https://adb-1128000650204589.9.azuredatabricks.net" 
-        DATABRICKS_TOKEN: "dapi61f701468bffc505edc50e9af2ace6a9-3"
+      - name: Databricks CLI config
+        run: |
+            pip install databricks-cli 
+            cat > ~/.databrickscfg << EOF 
+            [DEFAULT] 
+            host = ${{ secrets.DATABRICKS_HOST_URL }} 
+            token = ${{ secrets.DATABRICKS_TOKEN }} 
+            jobs-api-version = 2.1 
+            EOF 
+    
+      - name: Deploy code to databricks workspace
+        run: |
+            #databricks workspace import ${{ inputs.service_code_file }} ${{ inputs.databricks_code_path }} --language python --overwrite
+            databricks workspace import databricks/databricks/house_price/ml_workload/house_price_prediction/data_drift_monitoring/data_drift_func.py ** --language python --overwrite
 
     
   
