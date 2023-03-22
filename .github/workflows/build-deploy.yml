@@ -75,7 +75,7 @@ jobs:
         #   env:
         #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
-deploy:
+
   build:
     name: Build
     runs-on: ubuntu-latest
