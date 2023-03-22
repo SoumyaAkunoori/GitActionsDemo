@@ -75,7 +75,7 @@ jobs:
         #   env:
         #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
-  deploy:
+deploy:
   build:
     name: Build
     runs-on: ubuntu-latest
@@ -108,7 +108,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download Artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3.4.0
         with:
           name: my-artifact
       - name: Install Databricks CLI
@@ -120,11 +120,6 @@ jobs:
           DATABRICKS_HOST_URL: ${{ secrets.DATABRICKS_HOST_URL }}
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
 
-  deploy:
-    name: Deploy to Databricks Cluster
-    needs: publish
-    runs-on: ubuntu-latest
-    steps:
       - name: Download Artifact
         uses: actions/download-artifact@v2
         with:
