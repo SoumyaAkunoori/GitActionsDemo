@@ -76,17 +76,6 @@ jobs:
         #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   deploy:
-  name: CI/CD Pipeline
-
-on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'databricks/**'
-
-jobs:
-
   build:
     name: Build
     runs-on: ubuntu-latest
