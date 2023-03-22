@@ -137,15 +137,13 @@ jobs:
           DATABRICKS_HOST_URL: ${{ secrets.DATABRICKS_HOST_URL }}
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
 
-    name: Deploy to Databricks
-    runs-on: ubuntu-latest
-    needs: sonar
-    steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v3.4.0
+    
+  
+      - name: Checkout Repository
+        uses: actions/checkout@v3.4.0
       
-    - name: install-databricks-cli
-      uses: microsoft/install-databricks-cli@v1.0.0
+      - name: install-databricks-cli
+        uses: microsoft/install-databricks-cli@v1.0.0
     
     #- name: Deploy Notebooks to Databricks
     #  run: |
@@ -154,16 +152,16 @@ jobs:
       #env:
        # DATABRICKS_HOST_URL: ${{ secrets.DATABRICKS_HOST_URL }}
         #DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
-    - name: Deploy Notebooks to Databricks
-      uses: microsoft/databricks-import-notebook@v1.0.0
-      with:
+      - name: Deploy Notebooks to Databricks
+        uses: microsoft/databricks-import-notebook@v1.0.0
+        with:
         # Databricks host
-        databricks-host: ${{ secrets.DATABRICKS_HOST_URL }}
+          databricks-host: ${{ secrets.DATABRICKS_HOST_URL }}
         # Databricks token
-        databricks-token: ${{ secrets.DATABRICKS_TOKEN }}
+          databricks-token: ${{ secrets.DATABRICKS_TOKEN }}
         # LOCAL_NOTEBOOKS_PATH
-        local-path: ./databricks/databricks
+          local-path: ./databricks/databricks
         # REMOTE_NOTEBOOK_PATH
-        remote-path: /my-project
+          remote-path: /my-project
         
     
